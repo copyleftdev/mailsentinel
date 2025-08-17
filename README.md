@@ -1,5 +1,9 @@
 # MailSentinel
 
+<div align="center">
+  <img src="media/MSLOGO.png" alt="MailSentinel Logo" width="200"/>
+</div>
+
 MailSentinel is a Gmail triage system that uses local Ollama LLM inference to automatically classify and organize emails based on configurable profiles. It provides privacy-first email processing with comprehensive audit trails and policy-driven decision making.
 
 ## Development Story
@@ -247,10 +251,15 @@ MIT License - See LICENSE file for details.
 
 ## Author
 
-**copyleftdev** - Email classification system architect and developer
+**copy# MailSentinel
+
+<div align="center">
+  <img src="media/MSLOGO.png" alt="MailSentinel Logo" width="200"/>
+</div>
+
+**AI-Powered Gmail Classification System** architect and developer
 
 ## Support
 
 - Documentation: `docs/spec.md`
 - Issues: GitHub Issues
-- Contact: dj@codetestcode.io
