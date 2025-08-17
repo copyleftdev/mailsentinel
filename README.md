@@ -251,13 +251,8 @@ MIT License - See LICENSE file for details.
 
 ## Author
 
-**copy# MailSentinel
-
-<div align="center">
-  <img src="media/MSLOGO.png" alt="MailSentinel Logo" width="200"/>
-</div>
-
-**AI-Powered Gmail Classification System** architect and developer
+**copyleftdev** - Email classification system architect and developer  
+Contact: dj@codetestcode.io
 
 ## Support
 
