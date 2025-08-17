@@ -1,0 +1,78 @@
+# Mock configuration templates for testing
+
+test_config_minimal:
+  gmail:
+    client_id: "test-client-id"
+    client_secret: "test-client-secret"
+    token_file: "testdata/mocks/test-token.json"
+    scopes:
+      - "https://www.googleapis.com/auth/gmail.readonly"
+    batch_size: 10
+    rate_limit: 50
+    timeout: 10s
+
+  ollama:
+    base_url: "http://localhost:11434"
+    default_model: "qwen2.5:7b"
+    timeout: 15s
+    circuit_breaker:
+      max_requests: 5
+      interval: 30s
+      timeout: 30s
+      ready_to_trip: 3
+
+  profiles:
+    directory: "testdata/fixtures"
+    resolver_config: "testdata/fixtures/resolver.yaml"
+
+test_config_full:
+  gmail:
+    client_id: "full-test-client-id"
+    client_secret: "full-test-client-secret"
+    token_file: "testdata/mocks/full-test-token.json"
+    scopes:
+      - "https://www.googleapis.com/auth/gmail.readonly"
+      - "https://www.googleapis.com/auth/gmail.modify"
+    batch_size: 100
+    rate_limit: 250
+    timeout: 30s
+    retry_attempts: 3
+    retry_delay: 5s
+
+  ollama:
+    base_url: "http://localhost:11434"
+    default_model: "qwen2.5:7b"
+    timeout: 30s
+    max_retries: 3
+    request_timeout: 60s
+    health_check_period: 300s
+    circuit_breaker:
+      max_requests: 10
+      interval: 60s
+      timeout: 60s
+      ready_to_trip: 5
+
+  profiles:
+    directory: "profiles"
+    resolver_config: "profiles/resolver.yaml"
+    cache_enabled: true
+    cache_ttl: 3600s
+
+  audit:
+    enabled: true
+    log_file: "testdata/mocks/test-audit.log"
+    integrity_check: true
+    max_file_size: 10485760
+    rotation_count: 3
+    encryption_key: "test-encryption-key-32-bytes-long"
+
+  security:
+    token_encryption: true
+    input_sanitization: true
+    max_email_size: 5242880
+
+  server:
+    host: "localhost"
+    port: 8080
+    read_timeout: 30s
+    write_timeout: 30s

@@ -1,0 +1,37 @@
+version: "2.1.0"
+
+# Priority-based resolution
+priority_rules:
+  - name: "security_override"
+    condition: "any(profile.risk_factors.phishing_score >= 0.8)"
+    action: "delete"
+    priority: 1000
+    reason: "Security threat detected"
+  
+  - name: "importance_override"
+    condition: "any(profile.importance == 'critical' && profile.confidence >= 0.7)"
+    action: "star"
+    priority: 900
+    reason: "Critical importance override"
+  
+  - name: "trusted_sender_boost"
+    condition: "sender_reputation.trust_score >= 0.9"
+    confidence_boost: 0.1
+    priority: 800
+
+# Confidence weighting
+confidence_weighting:
+  method: "weighted_average"  # or "highest_confidence", "consensus"
+  profile_weights:
+    spam: 1.0
+    security_alerts: 1.2      # Higher weight for security
+    meetings: 0.8
+    newsletters: 0.6
+
+# Conflict resolution matrix
+conflict_resolution:
+  star_vs_archive: "star"
+  star_vs_delete: "delete"
+  archive_vs_delete: "delete"
+  label_vs_archive: "archive"
+  none_vs_any: "none"

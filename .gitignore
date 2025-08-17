@@ -1,0 +1,147 @@
+# MailSentinel - Privacy-First Gmail Triage Tool
+# Comprehensive .gitignore for Go project with OAuth, LLM, and audit data
+
+# Binaries and executables
+/bin/
+/build/
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+mailsentinel
+mailsentinel.exe
+
+# Go build artifacts
+*.test
+*.prof
+*.out
+*.cover
+coverage.txt
+coverage.html
+
+# Go workspace files
+go.work
+go.work.sum
+
+# Environment and configuration files
+.env
+.env.local
+.env.production
+.env.staging
+*.env
+
+# OAuth and authentication tokens
+data/gmail_token.json
+*.token
+*.credentials
+oauth_*.json
+client_secret*.json
+service_account*.json
+
+# Audit and log files
+data/audit/
+logs/
+*.log
+audit_*.json
+
+# Test data and temporary files
+testdata/temp/
+tmp/
+temp/
+*.tmp
+*.temp
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Dependency directories
+vendor/
+node_modules/
+
+# Debug and profiling files
+debug
+*.pprof
+*.trace
+cpu.prof
+mem.prof
+
+# Local development files
+local_config.yaml
+dev_config.yaml
+test_config.yaml
+
+# Backup files
+*.bak
+*.backup
+*~
+
+# Archive files
+*.tar.gz
+*.zip
+*.rar
+
+# Documentation build
+docs/_build/
+site/
+
+# Local testing artifacts
+test_results/
+benchmark_results/
+*.benchmark
+
+# Encryption keys (if accidentally created as files)
+*.key
+*.pem
+encryption_key*
+audit_key*
+
+# LLM model files (if downloaded locally)
+models/
+*.gguf
+*.bin
+
+# Profile backups
+profiles/*.backup
+profiles/backup/
+
+# Runtime data
+pid
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage directory used by tools like istanbul
+coverage/
+*.lcov
+
+# nyc test coverage
+.nyc_output
+
+# Dependency lock files (optional - uncomment if needed)
+# go.sum
+
+# Local scripts and utilities
+scripts/local_*
+scripts/dev_*
+scripts/debug_*
+
+# Configuration overrides
+config.local.yaml
+config.dev.yaml
+config.override.yaml

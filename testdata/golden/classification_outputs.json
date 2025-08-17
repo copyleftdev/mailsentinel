@@ -1,0 +1,82 @@
+{
+  "phishing_email_001": {
+    "input": {
+      "email_id": "test-email-001",
+      "subject": "URGENT: Your account will be suspended",
+      "from": "security@amaz0n-security.com"
+    },
+    "expected_output": {
+      "action": "delete",
+      "confidence": 0.95,
+      "reasoning": "Clear phishing attempt with suspicious domain mimicking Amazon, urgent language, and malicious link",
+      "metadata": {
+        "spam_score": 0.9,
+        "phishing_score": 0.95
+      }
+    }
+  },
+  "spam_email_002": {
+    "input": {
+      "email_id": "test-email-002",
+      "subject": "Make $5000 per week working from home!!!",
+      "from": "opportunity@get-rich-quick.biz"
+    },
+    "expected_output": {
+      "action": "archive",
+      "confidence": 0.85,
+      "reasoning": "Typical get-rich-quick spam with unrealistic promises and excessive exclamation marks",
+      "metadata": {
+        "spam_score": 0.85,
+        "phishing_score": 0.2
+      }
+    }
+  },
+  "legitimate_email_003": {
+    "input": {
+      "email_id": "test-email-003",
+      "subject": "Meeting tomorrow at 2pm",
+      "from": "colleague@company.com"
+    },
+    "expected_output": {
+      "action": "keep",
+      "confidence": 0.92,
+      "reasoning": "Professional business communication from known colleague about scheduled meeting",
+      "metadata": {
+        "spam_score": 0.05,
+        "phishing_score": 0.02
+      }
+    }
+  },
+  "important_email_005": {
+    "input": {
+      "email_id": "test-email-005",
+      "subject": "Re: Project proposal",
+      "from": "client@importantcorp.com"
+    },
+    "expected_output": {
+      "action": "prioritize",
+      "confidence": 0.94,
+      "reasoning": "Important business communication from client expressing interest in project proposal",
+      "metadata": {
+        "spam_score": 0.02,
+        "phishing_score": 0.01
+      }
+    }
+  },
+  "newsletter_email_007": {
+    "input": {
+      "email_id": "test-email-007",
+      "subject": "Newsletter: Tech Weekly #42",
+      "from": "newsletter@techweekly.com"
+    },
+    "expected_output": {
+      "action": "archive",
+      "confidence": 0.91,
+      "reasoning": "Legitimate newsletter from known tech publication with proper unsubscribe link",
+      "metadata": {
+        "spam_score": 0.15,
+        "phishing_score": 0.05
+      }
+    }
+  }
+}

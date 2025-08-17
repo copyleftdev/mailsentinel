@@ -1,0 +1,74 @@
+# Test profile configurations for unit testing
+
+spam_basic:
+  id: "spam_basic"
+  name: "Basic Spam Detection"
+  version: "1.0.0"
+  description: "Simple spam detection for testing"
+  
+  model:
+    name: "qwen2.5:7b"
+    temperature: 0.1
+    top_p: 0.9
+    max_tokens: 500
+  
+  system: "Classify emails as spam or not spam. Return JSON with action and confidence."
+  
+  response:
+    format: "json"
+    schema:
+      action: "string"
+      confidence: "number"
+      reasoning: "string"
+
+phishing_advanced:
+  id: "phishing_advanced"
+  name: "Advanced Phishing Detection"
+  version: "2.0.0"
+  description: "Advanced phishing detection with metadata"
+  dependencies: ["spam_basic"]
+  
+  model:
+    name: "qwen2.5:7b"
+    temperature: 0.05
+    top_p: 0.8
+    max_tokens: 800
+  
+  system: "Detect phishing attempts with detailed analysis. Include threat scores."
+  
+  response:
+    format: "json"
+    schema:
+      action: "string"
+      confidence: "number"
+      reasoning: "string"
+      metadata:
+        phishing_score: "number"
+        threat_level: "string"
+
+newsletter_classifier:
+  id: "newsletter_classifier"
+  name: "Newsletter Classification"
+  version: "1.1.0"
+  description: "Classify newsletters and promotional content"
+  
+  model:
+    name: "qwen2.5:7b"
+    temperature: 0.2
+    top_p: 0.9
+    max_tokens: 400
+  
+  system: "Classify newsletters and promotional emails. Determine if legitimate."
+  
+  conditional:
+    - condition: "subject contains 'newsletter' or subject contains 'unsubscribe'"
+      enabled: true
+    - condition: "from contains 'noreply' or from contains 'newsletter'"
+      enabled: true
+  
+  response:
+    format: "json"
+    schema:
+      action: "string"
+      confidence: "number"
+      category: "string"

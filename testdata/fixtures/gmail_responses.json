@@ -1,0 +1,91 @@
+{
+  "messages_list_response": {
+    "messages": [
+      {
+        "id": "test-email-001",
+        "threadId": "thread-001"
+      },
+      {
+        "id": "test-email-002", 
+        "threadId": "thread-002"
+      },
+      {
+        "id": "test-email-003",
+        "threadId": "thread-003"
+      }
+    ],
+    "nextPageToken": "next-page-token-123",
+    "resultSizeEstimate": 3
+  },
+  "message_get_response": {
+    "id": "test-email-001",
+    "threadId": "thread-001",
+    "labelIds": ["INBOX", "UNREAD"],
+    "snippet": "Your Amazon account has suspicious activity. Click here immediately to verify...",
+    "historyId": "12345",
+    "internalDate": "1705312200000",
+    "sizeEstimate": 1024,
+    "payload": {
+      "headers": [
+        {
+          "name": "Subject",
+          "value": "URGENT: Your account will be suspended"
+        },
+        {
+          "name": "From",
+          "value": "security@amaz0n-security.com"
+        },
+        {
+          "name": "To",
+          "value": "user@example.com"
+        },
+        {
+          "name": "Date",
+          "value": "Mon, 15 Jan 2024 10:30:00 +0000"
+        },
+        {
+          "name": "Message-ID",
+          "value": "<test-001@amaz0n-security.com>"
+        }
+      ],
+      "body": {
+        "data": "WW91ciBBbWF6b24gYWNjb3VudCBoYXMgc3VzcGljaW91cyBhY3Rpdml0eS4gQ2xpY2sgaGVyZSBpbW1lZGlhdGVseSB0byB2ZXJpZnk6IGh0dHA6Ly9hbWF6MG4tdmVyaWZ5LnN1c3BpY2lvdXMtZG9tYWluLmNvbS9sb2dpbg=="
+      }
+    }
+  },
+  "labels_list_response": {
+    "labels": [
+      {
+        "id": "INBOX",
+        "name": "INBOX",
+        "type": "system"
+      },
+      {
+        "id": "UNREAD",
+        "name": "UNREAD", 
+        "type": "system"
+      },
+      {
+        "id": "SPAM",
+        "name": "SPAM",
+        "type": "system"
+      },
+      {
+        "id": "Label_1",
+        "name": "Important",
+        "type": "user"
+      },
+      {
+        "id": "Label_2",
+        "name": "Newsletter",
+        "type": "user"
+      }
+    ]
+  },
+  "profile_response": {
+    "emailAddress": "user@example.com",
+    "messagesTotal": 1250,
+    "threadsTotal": 890,
+    "historyId": "12345"
+  }
+}

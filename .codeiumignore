@@ -1,0 +1,69 @@
+# MailSentinel - Windsurf Ignore Rules
+# Exclude sensitive and unnecessary files from Windsurf indexing
+
+# Secrets and credentials
+*.key
+*.pem
+*.p12
+*.pfx
+.env
+.env.*
+oauth_tokens/
+credentials/
+secrets/
+
+# Build artifacts
+bin/
+dist/
+build/
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Test data with potential PII
+testdata/real_emails/
+testdata/production_samples/
+*.eml
+
+# Large files and logs
+*.log
+*.log.*
+audit_logs/
+performance_logs/
+*.dump
+*.prof
+
+# Temporary files
+tmp/
+temp/
+.tmp/
+*.tmp
+*.temp
+
+# OS files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# IDE files (except .windsurf)
+.vscode/
+.idea/
+*.iml
+
+# Dependencies
+node_modules/
+vendor/
+go.sum
+
+# Generated files
+*.pb.go
+*_generated.go
+mock_*.go
+
+# Large datasets
+datasets/
+training_data/
+email_corpus/

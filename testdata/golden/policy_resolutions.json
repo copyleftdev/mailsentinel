@@ -1,0 +1,68 @@
+{
+  "conflict_resolution_spam_vs_important": {
+    "input": {
+      "classifications": [
+        {
+          "profile_id": "spam",
+          "classification": "spam",
+          "confidence": 0.85,
+          "reasoning": "Contains promotional language"
+        },
+        {
+          "profile_id": "important",
+          "classification": "important",
+          "confidence": 0.90,
+          "reasoning": "From known business contact"
+        }
+      ]
+    },
+    "expected_output": {
+      "final_classification": "important",
+      "confidence": 0.88,
+      "winning_profile": "important",
+      "resolution_method": "conflict_matrix"
+    }
+  },
+  "high_confidence_phishing": {
+    "input": {
+      "classifications": [
+        {
+          "profile_id": "phishing",
+          "classification": "phishing",
+          "confidence": 0.95,
+          "reasoning": "Suspicious domain and urgent language"
+        }
+      ]
+    },
+    "expected_output": {
+      "final_classification": "phishing",
+      "confidence": 0.95,
+      "winning_profile": "phishing",
+      "resolution_method": "single_profile"
+    }
+  },
+  "weighted_average_resolution": {
+    "input": {
+      "classifications": [
+        {
+          "profile_id": "spam",
+          "classification": "spam",
+          "confidence": 0.75,
+          "reasoning": "Some promotional indicators"
+        },
+        {
+          "profile_id": "newsletter",
+          "classification": "newsletter",
+          "confidence": 0.80,
+          "reasoning": "Has unsubscribe link"
+        }
+      ]
+    },
+    "expected_output": {
+      "final_classification": "newsletter",
+      "confidence": 0.78,
+      "winning_profile": "newsletter",
+      "resolution_method": "weighted_average"
+    }
+  }
+}

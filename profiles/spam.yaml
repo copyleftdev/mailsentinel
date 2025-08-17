@@ -1,0 +1,116 @@
+id: "spam"
+version: "1.0.0"
+model: "qwen2.5:7b"
+model_params:
+  temperature: 0.1
+  max_tokens: 1000
+  timeout_seconds: 30
+
+response:
+  schema: |
+    {
+      "type": "object",
+      "properties": {
+        "action": {"type": "string", "enum": ["archive", "delete", "star", "label", "none"]},
+        "confidence": {"type": "number", "minimum": 0, "maximum": 1},
+        "reasoning": {"type": "string"},
+        "labels": {"type": "array", "items": {"type": "string"}},
+        "metadata": {
+          "type": "object",
+          "properties": {
+            "spam_score": {"type": "number", "minimum": 0, "maximum": 1},
+            "phishing_score": {"type": "number", "minimum": 0, "maximum": 1}
+          }
+        }
+      },
+      "required": ["action", "confidence", "reasoning"]
+    }
+  validation:
+    required_fields: ["action", "confidence", "reasoning"]
+    confidence_range: [0.0, 1.0]
+    allowed_actions: ["archive", "delete", "star", "label", "none"]
+
+system: |
+  You are an expert email spam classifier for MailSentinel. Your job is to identify spam, phishing, and malicious emails with high accuracy.
+  
+  Analyze the email content for these spam indicators:
+  - Suspicious sender addresses or domains
+  - Generic greetings or impersonal language
+  - Urgent calls to action or threats
+  - Requests for personal information
+  - Poor grammar or spelling
+  - Suspicious links or attachments
+  - Offers that seem too good to be true
+  - Phishing attempts mimicking legitimate services
+  
+  Respond with JSON containing:
+  - action: "delete" for obvious spam/phishing, "archive" for borderline spam, "none" for legitimate emails
+  - confidence: 0.0-1.0 based on certainty
+  - reasoning: Clear explanation of decision
+  - metadata: spam_score and phishing_score (0.0-1.0)
+
+fewshot:
+  - name: "obvious_phishing"
+    input: |
+      Subject: URGENT: Your account will be suspended
+      From: security@amaz0n-security.com
+      Body: Your Amazon account has suspicious activity. Click here immediately to verify: http://amaz0n-verify.suspicious-domain.com/login
+    output: |
+      {
+        "action": "delete",
+        "confidence": 0.95,
+        "reasoning": "Clear phishing attempt with suspicious domain mimicking Amazon, urgent language, and malicious link",
+        "metadata": {
+          "spam_score": 0.9,
+          "phishing_score": 0.95
+        }
+      }
+
+  - name: "promotional_spam"
+    input: |
+      Subject: Make $5000 per week working from home!!!
+      From: opportunity@get-rich-quick.biz
+      Body: Amazing opportunity! No experience needed! Click now to start earning thousands from home with our proven system!
+    output: |
+      {
+        "action": "archive",
+        "confidence": 0.85,
+        "reasoning": "Typical get-rich-quick spam with unrealistic promises and excessive exclamation marks",
+        "metadata": {
+          "spam_score": 0.85,
+          "phishing_score": 0.2
+        }
+      }
+
+  - name: "legitimate_email"
+    input: |
+      Subject: Meeting tomorrow at 2pm
+      From: colleague@mycompany.com
+      Body: Hi John, just confirming our meeting tomorrow at 2pm in conference room B. I'll bring the quarterly reports we discussed.
+    output: |
+      {
+        "action": "none",
+        "confidence": 0.9,
+        "reasoning": "Legitimate business email from known colleague with specific, contextual content",
+        "metadata": {
+          "spam_score": 0.05,
+          "phishing_score": 0.01
+        }
+      }
+
+policy:
+  conditions:
+    - name: "high_phishing_risk"
+      expression: "metadata.phishing_score >= 0.8"
+      actions: ["delete"]
+      priority: 1000
+    
+    - name: "moderate_spam"
+      expression: "metadata.spam_score >= 0.6 && metadata.spam_score < 0.8"
+      actions: ["archive"]
+      priority: 500
+    
+    - name: "low_confidence"
+      expression: "confidence < 0.5"
+      actions: ["none"]
+      priority: 100
